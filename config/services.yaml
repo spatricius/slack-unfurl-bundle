@@ -1,0 +1,15 @@
+parameters:
+    gitlabApiUrl: '%env(resolve:GITLAB_API_URL)%'
+    gitlabToken: '%env(resolve:GITLAB_TOKEN)%'
+    gitlabAuthMethod: '%env(resolve:GITLAB_AUTH_METHOD)%'
+
+services:
+    _defaults:
+        bind:
+            $gitlabClient: '@zeichen32_gitlabapi.client.mygitlabclient'
+            $slackAppId: "%env(resolve:SLACK_APP_ID)%"
+            $slackAppToken: "%env(resolve:SLACK_APP_TOKEN)%"
+            $slackRequestToken: "%env(resolve:SLACK_REQUEST_TOKEN)%"
+            $accessoryImageUrl: "%env(resolve:SLACK_ACCESSORY_IMAGE_URL)%"
+            $accessoryAltText: "%env(resolve:SLACK_ACCESSORY_ALT_TEXT)%"
+            $gitlabDomain: '%env(resolve:GITLAB_DOMAIN)%'
