@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatricius\SlackUnfurlBundle\Service\GitlabTextResolver;
+namespace Spatricius\SlackUnfurlBundle\Service\SlackResponseRenderer;
 
 use Spatricius\SlackUnfurlBundle\Service\SlackRequestParser\SlackRequestParserInterface;
 

@@ -2,7 +2,6 @@
 
 namespace Spatricius\SlackUnfurlBundle\Service\SlackResponseRenderer;
 
-use Spatricius\SlackUnfurlBundle\Service\GitlabTextResolver\SlackResponseRendererInterface;
 use Spatricius\SlackUnfurlBundle\Service\SlackRequestParser\GitlabProjectParser;
 use Spatricius\SlackUnfurlBundle\Service\SlackRequestParser\SlackRequestParserInterface;
 

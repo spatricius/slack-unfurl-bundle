@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatricius\SlackUnfurlBundle\Service;
+namespace Spatricius\SlackUnfurlBundle\Service\SlackRequestParser;
 
-use Spatricius\SlackUnfurlBundle\Service\SlackRequestParser\SlackRequestParserInterface;
+use SlackRequestParserInterface;
 
 class SlackRequestParserResolver
 {

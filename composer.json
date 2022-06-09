@@ -3,13 +3,13 @@
   "type": "symfony-bundle",
   "description": "Slack unfurl based on Symfony Message",
   "authors": [
-      {
-          "name": "Spatricius",
-          "email": "spatricius@gmail.com"
-      }
+    {
+      "name": "Spatricius",
+      "email": "spatricius@gmail.com"
+    }
   ],
   "minimum-stability": "dev",
-  "prefer-stable" : true,
+  "prefer-stable": true,
   "require": {
     "php": ">=8.0.2",
     "ext-ctype": "*",
@@ -30,6 +30,8 @@
     "zeichen32/gitlabapibundle": "^6.0"
   },
   "autoload": {
-      "psr-4": { "Spatricius\\SlackUnfurlBundle\\": "" }
+    "psr-4": {
+      "Spatricius\\SlackUnfurlBundle\\": ""
+    }
   }
 }

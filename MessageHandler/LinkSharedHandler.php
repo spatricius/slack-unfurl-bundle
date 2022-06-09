@@ -3,7 +3,7 @@
 namespace Spatricius\SlackUnfurlBundle\MessageHandler;
 
 use Spatricius\SlackUnfurlBundle\Message\LinkSharedMessage;
-use Spatricius\SlackUnfurlBundle\Service\SlackRequestParserResolver;
+use Spatricius\SlackUnfurlBundle\Service\SlackRequestParser\SlackRequestParserResolver;
 use Spatricius\SlackUnfurlBundle\Service\SlackResponseRenderer\SlackResponseResolver;
 use Spatricius\SlackUnfurlBundle\Service\SlackUnfurlBuilder;
 use JoliCode\Slack\ClientFactory;
