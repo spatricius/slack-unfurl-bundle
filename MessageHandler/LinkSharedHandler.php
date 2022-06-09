@@ -35,7 +35,7 @@ class LinkSharedHandler implements MessageHandlerInterface
     public function __invoke(LinkSharedMessage $message)
     {
         $eventObject = $message->getEventObject();
-        $this->logger->info(sprintf('LinkSharedHandler invoked for links %s', $eventObject->links));
+        $this->logger->debug(sprintf('LinkSharedHandler invoked for links %s', $eventObject->links));
 
         $unfurls = [];
         foreach ($eventObject->links as $linkObject) {
@@ -58,7 +58,7 @@ class LinkSharedHandler implements MessageHandlerInterface
             'unfurls' => json_encode($unfurls),
         ];
 
-        $this->logger->info('Sending callback');
+        $this->logger->debug('Sending callback');
         try {
             $client = ClientFactory::create($this->slackAppToken);
             $response = $client->chatUnfurl($request);

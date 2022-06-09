@@ -1,4 +1,13 @@
 parameters:
+    env(SLACK_APP_ID): ~
+    env(SLACK_APP_TOKEN): ~
+    env(SLACK_REQUEST_TOKEN): ~
+    env(SLACK_ACCESSORY_IMAGE_URL): ~
+    env(SLACK_ACCESSORY_ALT_TEXT): ~
+    env(GITLAB_API_URL): ~
+    env(GITLAB_TOKEN): ~
+    env(GITLAB_AUTH_METHOD): ~
+    env(GITLAB_DOMAIN): ~
     gitlabApiUrl: '%env(resolve:GITLAB_API_URL)%'
     gitlabToken: '%env(resolve:GITLAB_TOKEN)%'
     gitlabAuthMethod: '%env(resolve:GITLAB_AUTH_METHOD)%'
