@@ -8,9 +8,9 @@ class SlackRequestParserResolver
 {
     protected array $parsers;
 
-    public function __construct(array $resolvers)
+    public function __construct(array $parsers)
     {
-        $this->parsers = $resolvers;
+        $this->parsers = $parsers;
     }
 
     public function resolve(string $url): ?SlackRequestParserInterface

@@ -15,14 +15,14 @@ class SpatriciusSlackUnfurlExtension extends Extension implements PrependExtensi
     public function load(array $configs, ContainerBuilder $container)
     {
         $childDefinition = $container->registerForAutoconfiguration(
-            '\App\Service\SlackRequestParser\SlackRequestParserInterface'
+            '\Spatricius\SlackUnfurlBundle\Service\SlackRequestParser\SlackRequestParserInterface'
         );
-        $childDefinition->addTag('spatricius.slack.unfurl.request.parser');
+        $childDefinition->addTag('spatricius.slack_unfurl.request_parser');
 
         $childDefinition = $container->registerForAutoconfiguration(
-            '\App\Service\GitlabTextResolver\SlackResponseRendererInterface'
+            '\Spatricius\SlackUnfurlBundle\Service\GitlabTextResolver\SlackResponseRendererInterface'
         );
-        $childDefinition->addTag('spatricius.slack.unfurl.response.renderer');
+        $childDefinition->addTag('spatricius.slack_unfurl.response_renderer');
     }
 
     public function prepend(ContainerBuilder $container)
@@ -33,13 +33,25 @@ class SpatriciusSlackUnfurlExtension extends Extension implements PrependExtensi
 
     protected function prependZeichen32(ContainerBuilder $container)
     {
-        $config = Yaml::parseFile(dirname(__DIR__).'/config/prepend/zeichen32_git_lab_api.yaml');
+        $config = Yaml::parseFile(
+            dirname(__DIR__).
+            DIRECTORY_SEPARATOR.'Resources'.
+            DIRECTORY_SEPARATOR.'config'.
+            DIRECTORY_SEPARATOR.'prepend'.
+            DIRECTORY_SEPARATOR.'zeichen32_git_lab_api.yaml'
+        );
         $container->prependExtensionConfig('zeichen32_git_lab_api', $config['zeichen32_git_lab_api']);
     }
 
     protected function prependMessanger(ContainerBuilder $container)
     {
-        $config = Yaml::parseFile(dirname(__DIR__).'/config/prepend/messenger.yaml');
+        $config = Yaml::parseFile(
+            dirname(__DIR__).
+            DIRECTORY_SEPARATOR.'Resources'.
+            DIRECTORY_SEPARATOR.'config'.
+            DIRECTORY_SEPARATOR.'prepend'.
+            DIRECTORY_SEPARATOR.'messenger.yaml'
+        );
         $container->prependExtensionConfig('framework', $config['framework']);
     }
 

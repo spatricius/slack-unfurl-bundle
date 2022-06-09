@@ -2,6 +2,7 @@
 
 namespace Spatricius\SlackUnfurlBundle\Controller;
 
+use Psr\Log\LoggerInterface;
 use Spatricius\SlackUnfurlBundle\Message\LinkSharedMessage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,9 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class WebhookController extends AbstractController
 {
     #[Route('/unfurl/', name: 'unfurl')]
-    public function respondAction(Request $request, MessageBusInterface $bus, $slackAppId, $slackRequestToken): Response
+    public function respondAction(Request $request, MessageBusInterface $bus, LoggerInterface $logger, $slackAppId, $slackRequestToken): Response
     {
-        $logger = $this->container->get('logger');
         $requestBody = $request->getContent();
         try {
             $requestJson = json_decode($requestBody, false);

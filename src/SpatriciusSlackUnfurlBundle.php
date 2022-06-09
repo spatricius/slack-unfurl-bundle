@@ -13,7 +13,12 @@ class SpatriciusSlackUnfurlBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/config'));
+        $loader = new YamlFileLoader(
+            $container,
+            new FileLocator(
+                __DIR__.DIRECTORY_SEPARATOR.'Resources'.DIRECTORY_SEPARATOR.'config'
+            )
+        );
         $loader->load('services.yaml');
     }
 }

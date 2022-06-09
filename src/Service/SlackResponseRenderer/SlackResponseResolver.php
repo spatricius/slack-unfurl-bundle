@@ -8,9 +8,9 @@ class SlackResponseResolver
 {
     protected array $renderers;
 
-    public function __construct(array $parsers)
+    public function __construct(array $renderers)
     {
-        $this->renderers = $parsers;
+        $this->renderers = $renderers;
     }
 
     public function resolve(SlackRequestParserInterface $slackRequestParser): ?string
