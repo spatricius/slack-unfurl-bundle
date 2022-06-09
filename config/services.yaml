@@ -22,3 +22,8 @@ services:
             $accessoryImageUrl: "%env(resolve:SLACK_ACCESSORY_IMAGE_URL)%"
             $accessoryAltText: "%env(resolve:SLACK_ACCESSORY_ALT_TEXT)%"
             $gitlabDomain: '%env(resolve:GITLAB_DOMAIN)%'
+
+    Spatricius\SlackUnfurlBundle\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
