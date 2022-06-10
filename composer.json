@@ -1,7 +1,8 @@
 {
   "name": "spatricius/slack-unfurl-bundle",
   "type": "symfony-bundle",
-  "description": "Slack unfurl based on Symfony Message",
+  "description": "Slack unfurl bundle based on Symfony Message",
+  "license": "MIT",
   "authors": [
     {
       "name": "spatricius",
