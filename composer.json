@@ -33,5 +33,13 @@
     "psr-4": {
       "Spatricius\\SlackUnfurlBundle\\": "src"
     }
+  },
+  "extra": {
+    "symfony": {
+      "endpoint": [
+        "https://api.github.com/repos/spatricius/recipes/contents/index.json",
+        "flex://defaults"
+      ]
+    }
   }
 }

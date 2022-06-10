@@ -6,11 +6,8 @@ use Spatricius\SlackUnfurlBundle\Service\SlackRequestParser\SlackRequestParserIn
 
 class SlackResponseResolver
 {
-    protected array $renderers;
-
-    public function __construct(array $renderers)
+    public function __construct(protected array $renderers)
     {
-        $this->renderers = $renderers;
     }
 
     public function resolve(SlackRequestParserInterface $slackRequestParser): ?string

@@ -20,6 +20,8 @@ class WebhookController extends AbstractController
             $requestJson = json_decode($requestBody, false);
         } catch
         (\Throwable $e) {
+            $logger->warning('Bad json in request body');
+            return new Response('<h1>nope.</h1>', 404);
         }
 
         // check token

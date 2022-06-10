@@ -6,21 +6,18 @@ use Gitlab\Client;
 
 class GitlabProjectParser implements SlackRequestParserInterface
 {
-    protected Client $gitlabClient;
     protected ?string $name;
     protected array $details;
-    protected ?string $gitlabDomain;
 
     public static function getDefaultPriority(): int
     {
         return 10;
     }
 
-    public function __construct(Client $gitlabClient, ?string $gitlabDomain)
-    {
-        $this->gitlabClient = $gitlabClient;
-        $this->gitlabDomain = $gitlabDomain;
-    }
+    public function __construct(
+        protected Client $gitlabClient,
+        protected ?string $gitlabDomain
+    ) {}
 
     public function supports(string $url): bool
     {
@@ -47,7 +44,7 @@ class GitlabProjectParser implements SlackRequestParserInterface
     {
         if (empty($this->details)) {
             $projects = $this->gitlabClient->projects()->all(
-                $this->getDefaultOptions()
+                $this->getOptions()
             );
             foreach ($projects as $project) {
                 if (str_contains($this->name, $project['web_url'])) {
@@ -67,7 +64,7 @@ class GitlabProjectParser implements SlackRequestParserInterface
         return !empty($details);
     }
 
-    protected function getDefaultOptions(): array
+    protected function getOptions(): array
     {
         return array(
             'simple' => true,
@@ -80,5 +77,11 @@ class GitlabProjectParser implements SlackRequestParserInterface
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    public function getId(): int
+    {
+        $details = $this->getLazyDetails();
+        return (int)$details['id'] ?? 0;
     }
 }

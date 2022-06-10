@@ -12,25 +12,13 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class LinkSharedHandler implements MessageHandlerInterface
 {
-    protected string $slackAppToken;
-    protected LoggerInterface $logger;
-    protected SlackRequestParserResolver $slackRequestParserResolver;
-    protected SlackResponseResolver $slackResponseResolver;
-    protected SlackUnfurlBuilder $slackUnfurlBuilder;
-
     public function __construct(
-        string $slackAppToken,
-        SlackRequestParserResolver $slackRequestParserResolver,
-        SlackResponseResolver $slackResponseResolver,
-        SlackUnfurlBuilder $slackUnfurlBuilder,
-        LoggerInterface $logger
-    ) {
-        $this->slackAppToken = $slackAppToken;
-        $this->slackRequestParserResolver = $slackRequestParserResolver;
-        $this->slackResponseResolver = $slackResponseResolver;
-        $this->slackUnfurlBuilder = $slackUnfurlBuilder;
-        $this->logger = $logger;
-    }
+        protected string $slackAppToken,
+        protected SlackRequestParserResolver $slackRequestParserResolver,
+        protected SlackResponseResolver $slackResponseResolver,
+        protected SlackUnfurlBuilder $slackUnfurlBuilder,
+        protected LoggerInterface $logger
+    ) {}
 
     public function __invoke(LinkSharedMessage $message)
     {

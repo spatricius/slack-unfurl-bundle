@@ -2,15 +2,10 @@
 
 namespace Spatricius\SlackUnfurlBundle\Service\SlackRequestParser;
 
-use SlackRequestParserInterface;
-
 class SlackRequestParserResolver
 {
-    protected array $parsers;
-
-    public function __construct(array $parsers)
+    public function __construct(protected array $parsers)
     {
-        $this->parsers = $parsers;
     }
 
     public function resolve(string $url): ?SlackRequestParserInterface

@@ -4,14 +4,10 @@ namespace Spatricius\SlackUnfurlBundle\Service;
 
 class SlackUnfurlBuilder
 {
-    private string $accessoryImageUrl;
-    private string $accessoryAltText;
-
-    public function __construct(string $accessoryImageUrl = '', string $accessoryAltText = '')
-    {
-        $this->accessoryImageUrl = $accessoryImageUrl;
-        $this->accessoryAltText = $accessoryAltText;
-    }
+    public function __construct(
+        protected string $accessoryImageUrl = '',
+        protected string $accessoryAltText = ''
+    ) {}
 
     public function build(string $text)
     {

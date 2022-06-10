@@ -7,15 +7,13 @@ use Gitlab\Client;
 class GitlabCommitParser implements SlackRequestParserInterface
 {
     protected int $iid;
-    protected Client $gitlabClient;
-    protected ?GitlabProjectParser $projectUrlData;
     protected array $details = array();
     protected array $parentsDetails = array();
 
-    public function __construct(Client $gitlabClient)
-    {
-        $this->gitlabClient   = $gitlabClient;
-    }
+    public function __construct(
+        protected Client $gitlabClient,
+        protected GitlabProjectParser $gitlabProjectParser
+    ) {}
 
     protected function getMatches($url): array
     {
@@ -28,7 +26,7 @@ class GitlabCommitParser implements SlackRequestParserInterface
     public function supports(string $url): bool
     {
         $matches = $this->getMatches($url);
-        if (empty($matches['iid'])){
+        if (empty($matches['iid'])) {
             return false;
         }
 
@@ -37,6 +35,7 @@ class GitlabCommitParser implements SlackRequestParserInterface
 
     public function parse(string $url): void
     {
+        $this->gitlabProjectParser->parse($url);
         $matches = $this->getMatches($url);
         $this->iid = (int)$matches['iid'];
     }
@@ -50,7 +49,7 @@ class GitlabCommitParser implements SlackRequestParserInterface
     {
         if (empty($this->details)) {
             $this->details = $this->gitlabClient->repositories()->commit(
-                $this->projectUrlData->getId(),
+                $this->gitlabProjectParser->getId(),
                 $this->getIid()
             );
         }
@@ -64,8 +63,8 @@ class GitlabCommitParser implements SlackRequestParserInterface
             $commitDetails = $this->getLazyDetails();
             if (!empty($commitDetails['parent_ids'])) {
                 foreach ($commitDetails['parent_ids'] as $parentId) {
-                    $parentCommit            = $this->gitlabClient->repositories()->commit(
-                        $this->projectUrlData->getId(),
+                    $parentCommit = $this->gitlabClient->repositories()->commit(
+                        $this->gitlabProjectParser->getId(),
                         $parentId
                     );
                     $this->parentsDetails[] = $parentCommit;

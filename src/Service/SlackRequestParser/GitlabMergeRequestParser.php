@@ -6,16 +6,14 @@ use Gitlab\Client;
 
 class GitlabMergeRequestParser implements SlackRequestParserInterface
 {
-    protected Client $gitlabClient;
-    protected ?GitlabProjectParser $projectUrlData;
     protected ?int $iid;
     protected array $details = array();
     protected array $commits = array();
 
-    public function __construct(Client $gitlabClient)
-    {
-        $this->gitlabClient = $gitlabClient;
-    }
+    public function __construct(
+        protected Client $gitlabClient,
+        protected GitlabProjectParser $gitlabProjectParser
+    ) {}
 
     protected function getMatches($url): array
     {
@@ -37,6 +35,7 @@ class GitlabMergeRequestParser implements SlackRequestParserInterface
 
     public function parse(string $url): void
     {
+        $this->gitlabProjectParser->parse($url);
         $matches = $this->getMatches($url);
         $this->iid = (int)$matches['iid'];
     }
@@ -44,7 +43,7 @@ class GitlabMergeRequestParser implements SlackRequestParserInterface
     public function getLazyDetails(): array
     {
         if (empty($this->details)) {
-            $this->details = $this->gitlabClient->mergeRequests()->show($this->iid, $this->projectUrlData->getId(), $this->options);
+            $this->details = $this->gitlabClient->mergeRequests()->show($this->gitlabProjectParser->getId(), $this->iid);
         }
 
         return $this->details;
@@ -53,7 +52,7 @@ class GitlabMergeRequestParser implements SlackRequestParserInterface
     public function getLazyCommits(): array
     {
         if (empty($this->commits)) {
-            $this->commits = $this->gitlabClient->mergeRequests()->commits($this->iid, $this->projectUrlData->getId());
+            $this->commits = $this->gitlabClient->mergeRequests()->commits($this->gitlabProjectParser->getId(), $this->iid);
         }
 
         return $this->commits;

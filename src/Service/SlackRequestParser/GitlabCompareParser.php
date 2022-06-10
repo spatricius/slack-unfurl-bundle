@@ -8,12 +8,11 @@ class GitlabCompareParser implements SlackRequestParserInterface
 {
     protected string $branch1;
     protected string $branch2;
-    protected Client $gitlabClient;
 
-    public function __construct(Client $gitlabClient)
-    {
-        $this->gitlabClient = $gitlabClient;
-    }
+    public function __construct(
+        protected Client $gitlabClient,
+        protected GitlabProjectParser $gitlabProjectParser
+    ) {}
 
     protected function getMatches($url): array
     {
@@ -35,6 +34,7 @@ class GitlabCompareParser implements SlackRequestParserInterface
 
     public function parse(string $url): void
     {
+        $this->gitlabProjectParser->parse($url);
         $matches = $this->getMatches($url);
         $this->branch1 = $matches['branch1'];
         $this->branch2 = $matches['branch2'];
@@ -53,7 +53,7 @@ class GitlabCompareParser implements SlackRequestParserInterface
     public function getDetails(): array
     {
         $compare = $this->gitlabClient->repositories()->compare(
-            $this->projectUrlData->getId(),
+            $this->gitlabProjectParser->getId(),
             $this->getBranch1(),
             $this->getBranch2()
         );
