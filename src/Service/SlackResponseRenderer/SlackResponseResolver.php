@@ -6,7 +6,7 @@ use Spatricius\SlackUnfurlBundle\Service\SlackRequestParser\SlackRequestParserIn
 
 class SlackResponseResolver
 {
-    public function __construct(protected array $renderers)
+    public function __construct(protected \Traversable $renderers)
     {
     }
 

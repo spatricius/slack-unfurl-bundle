@@ -6,7 +6,7 @@ use Gitlab\Client;
 
 class GitlabCommitParser implements SlackRequestParserInterface
 {
-    protected int $iid;
+    protected string $iid = '';
     protected array $details = array();
     protected array $parentsDetails = array();
 
@@ -37,10 +37,10 @@ class GitlabCommitParser implements SlackRequestParserInterface
     {
         $this->gitlabProjectParser->parse($url);
         $matches = $this->getMatches($url);
-        $this->iid = (int)$matches['iid'];
+        $this->iid = $matches['iid'];
     }
 
-    public function getIid(): int
+    public function getIid(): string
     {
         return $this->iid;
     }

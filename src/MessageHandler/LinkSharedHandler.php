@@ -23,18 +23,18 @@ class LinkSharedHandler implements MessageHandlerInterface
     public function __invoke(LinkSharedMessage $message)
     {
         $eventObject = $message->getEventObject();
-        $this->logger->debug(sprintf('LinkSharedHandler invoked for links %s', $eventObject->links));
-
         $unfurls = [];
         foreach ($eventObject->links as $linkObject) {
+            $this->logger->debug(sprintf('LinkSharedHandler invoked for link %s', $linkObject->url));
             $slackRequestParser = $this->slackRequestParserResolver->resolve($linkObject->url);
             if (!$slackRequestParser) {
                 $this->logger->warning(sprintf('No slack request parser found for url %s', $linkObject->url));
             }
-
+            $slackRequestParser->parse($linkObject->url);
             $text = $this->slackResponseResolver->resolve($slackRequestParser);
             if (!$text) {
                 $this->logger->warning(sprintf('No text response found for url %s', $linkObject->url));
+                return;
             }
 
             $unfurls[$linkObject->url] = $this->slackUnfurlBuilder->build($text);
@@ -50,7 +50,7 @@ class LinkSharedHandler implements MessageHandlerInterface
         try {
             $client = ClientFactory::create($this->slackAppToken);
             $response = $client->chatUnfurl($request);
-            $this->logger->info(sprintf('Callback sent with response: %s', $response));
+            $this->logger->info(sprintf('Callback sent with response: %s', $response->getOk() ? 'ok' : 'not ok'));
         } catch (\Exception $e) {
             $message = $e->getMessage();
             $this->logger->error(sprintf('Exception when sending callback: %s, with links: %s', $message, var_export($eventObject->links, true)));

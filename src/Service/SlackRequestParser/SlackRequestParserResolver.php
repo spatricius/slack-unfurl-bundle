@@ -4,7 +4,7 @@ namespace Spatricius\SlackUnfurlBundle\Service\SlackRequestParser;
 
 class SlackRequestParserResolver
 {
-    public function __construct(protected array $parsers)
+    public function __construct(protected \Traversable $parsers)
     {
     }
 

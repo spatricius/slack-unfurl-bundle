@@ -20,7 +20,7 @@ class SpatriciusSlackUnfurlExtension extends Extension implements PrependExtensi
         $childDefinition->addTag('spatricius.slack_unfurl.request_parser');
 
         $childDefinition = $container->registerForAutoconfiguration(
-            '\Spatricius\SlackUnfurlBundle\Service\GitlabTextResolver\SlackResponseRendererInterface'
+            '\Spatricius\SlackUnfurlBundle\Service\SlackResponseRenderer\SlackResponseRendererInterface'
         );
         $childDefinition->addTag('spatricius.slack_unfurl.response_renderer');
     }

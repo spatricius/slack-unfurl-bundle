@@ -7,11 +7,11 @@ use Gitlab\Client;
 class GitlabProjectParser implements SlackRequestParserInterface
 {
     protected ?string $name;
-    protected array $details;
+    protected array $details = array();
 
     public static function getDefaultPriority(): int
     {
-        return 10;
+        return -5;
     }
 
     public function __construct(
@@ -47,7 +47,7 @@ class GitlabProjectParser implements SlackRequestParserInterface
                 $this->getOptions()
             );
             foreach ($projects as $project) {
-                if (str_contains($this->name, $project['web_url'])) {
+                if (str_contains($project['web_url'], $this->name)) {
                     $this->details = $project;
                     break;
                 }

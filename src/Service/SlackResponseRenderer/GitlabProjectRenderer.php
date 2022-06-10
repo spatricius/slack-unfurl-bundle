@@ -18,11 +18,10 @@ class GitlabProjectRenderer implements SlackResponseRendererInterface
         $name = $slackRequestParser->getName();
         $details = $slackRequestParser->getLazyDetails();
 
-        $detailsText = var_export($details, true);
-
         $text = <<<TEXT
 Project '$name':
-$detailsText
+Description: {$details['description']}
+Last activity: {$details['last_activity_at']}
 TEXT;
 
         return $text;
