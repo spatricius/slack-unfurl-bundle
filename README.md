@@ -6,10 +6,10 @@ Unfurl Slack urls with help of [Symfony Messenger](https://symfony.com/doc/curre
 ### Gitlab
 With Gitlab client by [Zeichen32GitLabApiBundle](https://github.com/Zeichen32/GitLabApiBundle)
 
-## Example Usage
+## Usage
 See example app: [spatricius/slack-unfurl](https://github.com/spatricius/slack-unfurl)
 
-## Example Slack configuration
+## Slack configuration
 Example manifest in [Slack Apps](https://api.slack.com/apps)
 
 ```yaml
