@@ -4,7 +4,7 @@
   "description": "Slack unfurl based on Symfony Message",
   "authors": [
     {
-      "name": "Spatricius",
+      "name": "spatricius",
       "email": "spatricius@gmail.com"
     }
   ],
@@ -32,14 +32,6 @@
   "autoload": {
     "psr-4": {
       "Spatricius\\SlackUnfurlBundle\\": "src"
-    }
-  },
-  "extra": {
-    "symfony": {
-      "endpoint": [
-        "https://api.github.com/repos/spatricius/recipes/contents/index.json",
-        "flex://defaults"
-      ]
     }
   }
 }
