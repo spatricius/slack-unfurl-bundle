@@ -15,7 +15,7 @@ class GitlabMergeRequestRenderer implements SlackResponseRendererInterface
     /** @param GitlabMergeRequestParser $slackRequestParser */
     public function resolve(SlackRequestParserInterface $slackRequestParser): string
     {
-        $details = $slackRequestParser->getDetails();
+        $details = $slackRequestParser->getLazyDetails();
         $filesChanged = [];
         foreach ($details['diffs'] as $diff) {
             $filesChanged[$diff['new_path']] = 1;
