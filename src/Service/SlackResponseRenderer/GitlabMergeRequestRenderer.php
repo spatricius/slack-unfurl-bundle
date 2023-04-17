@@ -22,6 +22,7 @@ class GitlabMergeRequestRenderer implements SlackResponseRendererInterface
             $filesChanged[$diff['old_path']] = 1;
         }
         $filesChangedText = '- '.implode(",\n- ", array_keys($filesChanged));
+        $filesChangedText = var_export($details, true);
 
         $text = <<<TEXT
 MR {$details['title']} ({$details['state']})
