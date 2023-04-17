@@ -27,8 +27,8 @@ class GitlabCompareRenderer implements SlackResponseRendererInterface
         $filesChangedText = '- '.implode(",\n- ", array_keys($filesChanged));
 
         $text = <<<TEXT
-Comparing $branch1 against $branch2 with commit '{$details['commit']['title']}' ({$details['commit']['short_id']}) by {$details['commit']['committer_name']}
-Committed at {$details['commit']['committed_date']} 
+Comparing `$branch1` against `$branch2` with commit `{$details['commit']['title']} ({$details['commit']['short_id']})`
+Committed at {$details['commit']['committed_date']}
 Files changed:
 $filesChangedText
 TEXT;

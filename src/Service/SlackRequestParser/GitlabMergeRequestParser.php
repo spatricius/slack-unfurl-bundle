@@ -9,6 +9,7 @@ class GitlabMergeRequestParser implements SlackRequestParserInterface
     protected ?int $iid;
     protected array $details = array();
     protected array $commits = array();
+    protected array $changes = array();
 
     public function __construct(
         protected Client $gitlabClient,
@@ -47,6 +48,15 @@ class GitlabMergeRequestParser implements SlackRequestParserInterface
         }
 
         return $this->details;
+    }
+
+    public function getLazyChanges(): array
+    {
+        if (empty($this->changes)) {
+            $this->changes = $this->gitlabClient->mergeRequests()->changes($this->gitlabProjectParser->getId(), $this->iid);
+        }
+
+        return $this->changes;
     }
 
     public function getLazyCommits(): array

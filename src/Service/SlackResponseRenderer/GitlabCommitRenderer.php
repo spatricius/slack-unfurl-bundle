@@ -19,7 +19,7 @@ class GitlabCommitRenderer implements SlackResponseRendererInterface
         $parentLinks = $this->getParentLinks($slackRequestParser->getLazyParentsDetails());
 
         $text = <<<TEXT
-Commit '{$commit['title']}' ({$commit['short_id']}) by {$commit['committer_name']}
+Commit `{$commit['title']} ({$commit['short_id']})` by {$commit['committer_name']}
 Committed at {$commit['committed_date']}
 Total changes: {$commit['stats']['total']}
 $parentLinks
